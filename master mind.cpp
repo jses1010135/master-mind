@@ -2,75 +2,68 @@
 //
 
 #include <iostream>
+#include <ctime>
 
 void setanswer(int answer[4])
 {
-	bool repeat;
-	for (int i = 0; i < 4; i++)
-	{
-		answer[i] = rand() % 10;
-		repeat = false;
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		for (int j = 0; j < i; j++)
-		{
-			if (answer[i] == answer[j])
-			{
-				repeat = true;
-			}
-		}
-	}
-	if (repeat == true)
-	{
-		setanswer(answer);
-	}
-	for (int i = 0; i < 4; i++)
-	{
-		answer[i] = rand() % 10;
-	}
+    bool used[10] = { false };
+    int count = 0;
+    while (count < 4)
+    {
+        int num = rand() % 10;
+        if (!used[num])
+        {
+            used[num] = true;
+            answer[count++] = num;
+        }
+    }
 }
+
 int main()
 {
-	srand(time(NULL));
-	int answer[4];
-	setanswer(answer);
-	for (int i = 0; i < 4; i++)
-	{
-		std::cout << answer[i];
-	}
-	std::cout << std::endl;
-	int guess[4];
-	int a = 0, b = 0;
-	while (a != 4)
-	{
-		a = 0;
-		b = 0;
-		std::cin >> guess[0] >> guess[1] >> guess[2] >> guess[3];
-		for (int i = 0; i < 4; i++)
-		{
-			if (guess[i] == answer[i])
-			{
-				a++;
-			}
-			for (int j = 0; j < 4; j++)
-			{
-				if (guess[i] == answer[j])
-				{
-					b++;
-				}
-			}
-		}
-		b -= a;
-		std::cout << a << "A" << b << "B" << std::endl;
-	}
-	std::cout << "You win!" << std::endl;
-	return 0;
+    srand(time(NULL));
+    int answer[4];
+    setanswer(answer);
 
-			
-		
-	
-	
+    int guess[4];
+    int a = 0, b = 0;
+    int n = 0;
+
+   
+
+    while (a != 4)
+    {
+        a = 0;
+        b = 0;
+        std::cout << "請輸入 4 個不重複的數字（0-9）：";
+        std::cin >> n;
+        guess[0] = n / 1000;
+        guess[1] = (n % 1000) / 100;
+        guess[2] = (n % 100) / 10;
+        guess[3] = n % 10;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (guess[i] == answer[i])
+            {
+                a++;
+            }
+            else
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    if (guess[i] == answer[j])
+                    {
+                        b++;
+                        break;
+                    }
+                }
+            }
+        }
+        std::cout << a << "A" << b << "B" << std::endl;
+    }
+    std::cout << "恭喜你，猜對了！" << std::endl;
+    return 0;
 }
 
 // 執行程式: Ctrl + F5 或 [偵錯] > [啟動但不偵錯] 功能表
