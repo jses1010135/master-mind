@@ -14,7 +14,7 @@ void setanswer(int answer[4])
 		if (!used[num])//如果used[num] = false，代表num還沒被使用過
 		{
 			used[num] = true;//used[num] = true代表num已經被使用過
-			answer[count++] = num;//count++是先用count的值，再加1；++count是先加1，再用count的值
+			answer[count++] = num;//count++是先用count的值，再加1；++count是先加1，再用count的值 //將num存放在answer[count]中，並且count加1
 		}
 	}
 }
@@ -27,8 +27,6 @@ int main()
 	int guess[4];//guess是用來存放猜測的數字的陣列[0]~[3]
 	int a = 0, b = 0;//a是用來存放A的數量，b是用來存放B的數量
 	int n = 0;//n是用來存放輸入的數字
-
-
 
 	while (a != 4)//當a不等於4時，代表還沒猜對，繼續執行迴圈
 	{
@@ -47,7 +45,7 @@ int main()
 			{
 				a++;// a加1
 			}
-			else
+			else//否則
 			{
 				for (int j = 0; j < 4; j++)//j從0開始，j < 4代表j小於4，j++代表j加1
 				{
